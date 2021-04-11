@@ -1,10 +1,9 @@
-﻿//не работает эта дичь
-#include <iostream>
+﻿#include <iostream>
 #include <vector>
 #include <stdio.h>
 #include <stdlib.h>
 using namespace std;
-void show(vector<vector<int>>&F1, vector<vector<int>>&F2, vector<vector<int>>&F3, int n)
+void show(vector<vector<int>>& F1, vector<vector<int>>& F2, vector<vector<int>>& F3, int n)
 {
     int r;
     cout << "\n-----------------------------------------------\n";
@@ -83,19 +82,19 @@ void sort(int size, vector<int>& arr)
         }
     }
 }
-int Kol(vector<int>& arr,int n)
+int Kol(vector<int>& arr, int n)
 {
-    int i = 0,Kol=0;
-    while (i<n)
+    int i = 0, Kol = 0;
+    while (i < n)
     {
-        Kol++;
         if (arr[i] == 0)
         {
-            i = n;
+            break;
         }
+        Kol++;
         i++;
     }
-    if (arr[n-1]!=0)
+    if (arr[n - 1] != 0)
     {
         Kol = n;
     }
@@ -466,7 +465,8 @@ void met3(vector<int>& STR, int n)
                         u++;
                     }
                     u = 0;
-                    for (int j = 0; j < Sser + Sser1; j++)
+                    int NN = Kol(F1[i], n) + Kol(F3[i], n);
+                    for (int j = 0; j < NN; j++)
                     {
                         if (F3[i][j] == 0)
                         {
@@ -507,7 +507,8 @@ void met3(vector<int>& STR, int n)
                         u++;
                     }
                     u = 0;
-                    for (int j = 0; j < Sser + Sser1; j++)
+                    int NN = Kol(F1[i], n) + Kol(F3[i], n);
+                    for (int j = 0; j < NN; j++)
                     {
                         if (F3[i][j] == 0)
                         {
@@ -554,7 +555,8 @@ void met3(vector<int>& STR, int n)
                         u++;
                     }
                     u = 0;
-                    for (int j = Sser1; j < Sser + Sser1; j++)
+                    int NN = Kol(F1[i], n) + Kol(F3[i], n);
+                    for (int j = Sser1; j < NN; j++)
                     {
                         if (F1[i][j] == 0)
                         {
@@ -595,7 +597,8 @@ void met3(vector<int>& STR, int n)
                         u++;
                     }
                     u = 0;
-                    for (int j = 0; j < Sser + Sser1; j++)
+                    int NN = Kol(F1[i], n) + Kol(F3[i], n);
+                    for (int j = 0; j < NN; j++)
                     {
                         if (F1[i][j] == 0)
                         {
@@ -643,7 +646,8 @@ void met3(vector<int>& STR, int n)
                     }
                     u = 0;
                     int N = Sser + Sser1;
-                    for (int j = 0; j < N; j++)
+                    int NN = Kol(F1[0], n) + Kol(F3[0], n);
+                    for (int j = 0; j < NN; j++)
                     {
                         if (F2[i][j] == 0)
                         {
@@ -689,7 +693,8 @@ void met3(vector<int>& STR, int n)
                         u++;
                     }
                     u = 0;
-                    for (int j = 0; j < Sser + Sser1; j++)
+                    int NN = Kol(F1[i], n) + Kol(F3[i], n);
+                    for (int j = 0; j < NN; j++)
                     {
                         if (F2[i][j] == 0)
                         {
@@ -752,11 +757,11 @@ int main()
     {
         cout << STR[i] << "\t";
     }
-    cout << "Введите номер метода\n1)Естественное слияние\n2)Сбалансированное слияние\n3)Многофазное слияние\n";
-    while (OP<0)
+    cout << "\nВведите номер метода\n1)Естественное слияние\n2)Сбалансированное слияние\n3)Многофазное слияние\n";
+    while (OP < 0)
     {
         cin >> OP;
-        if (OP<0)
+        if (OP < 0)
         {
             cout << "Ошибка!\n";
         }
@@ -768,6 +773,11 @@ int main()
         break;
     case 2:
         met2(STR, 0, n - 1);
+        for (int i = 0; i < n; i++)
+        {
+            cout << STR[i] << '\t';
+        }
+        cout << endl;
         break;
     case 3:
         met3(STR, n);
